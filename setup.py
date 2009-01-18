@@ -4,7 +4,10 @@ from setuptools import setup
 from beanstalkc import __version__ as version
 
 git_version = os.popen('git describe --tags --abbrev=6').read().strip()[7:]
-pkg_version = version if not git_version else version + '.dev' + git_version
+if git_version:
+    pkg_version = version + '.dev' + git_version
+else:
+    pkg_version = version
 
 setup(
     name='beanstalkc',
